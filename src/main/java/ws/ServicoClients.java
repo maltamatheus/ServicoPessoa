@@ -19,28 +19,35 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 
-public class ServicoClients {
+//Essa classe foi incluída nesse projeto apenas para fins de versionamento
+//Se você escolher colocar essa classe num outro projeto, a fidelidade do teste ficará mais próxima da realidade
+//Obs: Lembre-se que o Webservice em questão precisa estar em execução
+public class ServicoClients { 
     public static void main(String[] args) throws SOAPException, IOException {
 
         String requestSoap;//requisicao/request no formato xml, repare que isto foi copiado da regiao destacada em azul na figura 1
-        requestSoap =  "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ws=\"http://ws/\">\r\n"
+        requestSoap =  
+        		  "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ws=\"http://ws/\">\r\n"
         		+ "   <soapenv:Header/>\r\n"
         		+ "   <soapenv:Body>\r\n"
         		+ "      <ws:servico01>\r\n"
         		+ "         <!--Optional:-->\r\n"
         		+ "         <arg0>\r\n"
-        		+ "            <!--Optional:-->\r\n"
+        		+ "            <!--Optional:Numérico-->\r\n"
         		+ "            <idade>42</idade>\r\n"
-        		+ "            <!--Optional:-->\r\n"
-        		+ "            <nome>Heitor Caliman</nome>\r\n"
+        		+ "            <!--Optional:String-->\r\n"
+        		+ "            <nome>Seu Nome Aqui</nome>\r\n"
         		+ "         </arg0>\r\n"
         		+ "      </ws:servico01>\r\n"
         		+ "   </soapenv:Body>\r\n"
         		+ "</soapenv:Envelope>";
+        
         SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+        
         SOAPConnection soapConnection = soapConnectionFactory.createConnection();
         
-		//url do webservice nao e a url do wsdl do webservice, repare que isto foi copia da parte vermelha da figura 1
+        //Aqui não é a para colocar a url do WSDL do webservice
+        //Aqui deve ser colocada SOMENTE a url do webservice
         String url = "http://localhost:8080/Servico";
         
 		MimeHeaders headers = new MimeHeaders();
@@ -51,7 +58,7 @@ public class ServicoClients {
         // header SOAPAction e sua respectiva url, esta url muda de webservice para webservice. 
 		// Alguns webservice nao possuem esta proprieade, nestes webservice esta linha deve ser excluida
         // o valor "http://tempuri.org/CalcPrazo" foi obtido com base na região destacada em verde da figura 2.
-//		headers.addHeader("SOAPAction", "http://tempuri.org/CalcPrazo");
+		headers.addHeader("SOAPAction", "http://tempuri.org/CalcPrazo");
  
         //fim da regiao a ser excluida caso o webservice nao possua a proprieade SOAPAction
  
