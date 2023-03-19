@@ -10,6 +10,7 @@ public class CalculadoraServerPublisher {
 		
 		Endpoint.publish("http://localhost:8080/calc", new CalculadoraServerImpl());
 		System.out.println("Rodando a Calculadora");
+		
 	}
 
 }
